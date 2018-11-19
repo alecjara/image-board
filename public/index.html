@@ -1,10 +1,31 @@
 <!doctype html>
 <html>
 <head>
-    <title></title>
+    <title>ImageBoard!</title>
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
+
+    
+    <h3>Latest Images</h3>
+
+    <div id="main">
+
+        <!-- image coming from data on script.js we add : right before src -->
+        <div class="image" v-for = "image in images">
+        <img :src ="image.url">
+        <p>{{image.title}}</p>
+        </div>
+
+        <!-- html attribute dynamic we just add: right before href -->
+        <!-- <a :href=""> -->
+
+
+    </div>
+
+
     <script src="/js/vue.js"></script>
     <script src="/js/axios.min.js"></script>
+    <script src="/js/script.js"></script>
 </body>
 </html>

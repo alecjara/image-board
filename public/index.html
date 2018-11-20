@@ -6,8 +6,8 @@
 </head>
 <body>
 
-    
-    <h3>Latest Images</h3>
+
+    <h1>Ale's ImageBoard</h1>
 
     <div id="main">
 
@@ -17,9 +17,14 @@
         <p>{{image.title}}</p>
         </div>
 
-        <!-- html attribute dynamic we just add: right before href -->
-        <!-- <a :href=""> -->
-
+        <!-- part2 -->
+        <form>
+            <input v-model="form.title" placeholder="title" type="text" name="title">
+            <input v-model="form.description" placeholder="description" type="text" name="description">
+            <input v-model="form.username" placeholder="username" type="text" name="username">
+            <input type="file" accept="image/*" @change="handleFileChange">
+            <button @click="uploadFile">upload</button>
+        </form>
 
     </div>
 

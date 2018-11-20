@@ -2,29 +2,36 @@
     font-family: "Trebuchet MS";
 }
 
-/* .square{
-    width: 5px;
-    height: 5px;
-    Background-color: red;
-} */
-
 #main {
     display: flex;
-    justify-content: space-around;
-    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    justify-content: flex-start;
 
-
+    /* justify-content: space-around;
+    flex-direction: row;
+    display: inline-block; */
+    /* justify-content: space-around;
+    flex-direction: row-reverse; */
 }
 
 img {
-    height: 400px;
-    width: 400px;
+    height: 300px;
+    width: 300px;
     /* border: 2px solid black; */
     object-fit: cover;
-
 }
 
 .image {
     border: 2px solid black;
     margin: 10px;
+}
+
+input {
+    font-size: 20px;
+}
+
+button {
+    font-size: 20px;
+    border-radius: 25%;
+    border: 2px solid black;
 }

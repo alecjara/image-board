@@ -11,10 +11,10 @@
 
     <div id="main">
 
-        <!-- image coming from data on script.js we add : right before src -->
-        <div class="image" v-for = "image in images">
-        <img :src ="image.url">
+        <div class="image" v-for = "image in images" @click="toggleComponent">
+        <img :src ="image.url" :id="image.id">
         <p>{{image.title}}</p>
+
         </div>
 
         <!-- part2 -->
@@ -25,8 +25,38 @@
             <input type="file" accept="image/*" @change="handleFileChange">
             <button @click="uploadFile">upload</button>
         </form>
+            <!-- part3 -->
+        <!-- to add prop here name orange is from component props and name green from new Vue instance-->
+        <!-- :name gives me the full name I wrote in the Vue -->
+        <some-component
+        :image-id = "imageId"
+        v-if="imageId"
+        @close-component="closingTheComponent"
+        @click="toggleComponent"
+        >
+        </some-component>
 
     </div>
+
+
+    <script id="my-template" type="text/x-template">
+        <div id="modal">
+            <h1 @click="closeComponent">x</h1>
+            <img :src ="url" id="modalimage">
+            <h1>Title: {{ title }}</h1>
+            <h2>Description: {{ description }}</h2>
+            <h2>User name: {{ username }}</h2>
+            <p>Created at: {{ created_at}}</p>
+            <h1 @click="handleClick"></h1>
+
+            <form method="POST">
+                <input v-model="form.comment" placeholder="comment" type="text" name="comment">
+                <input v-model="form.username" placeholder="username" type="text" name="username">
+                <button @click="submit">submit</button>
+            </form>
+
+        </div>
+    </script>
 
 
     <script src="/js/vue.js"></script>

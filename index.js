@@ -5,7 +5,8 @@ var uidSafe = require('uid-safe');
 var path = require('path');
 const s3 = require('./s3');
 const s3Url = require('./config.json');
-
+const bodyParser = require("body-parser");
+app.use(bodyParser.json());
 
 //boilerplate for uploading
 var diskStorage = multer.diskStorage({
@@ -29,14 +30,7 @@ var uploader = multer({
 
 app.disable("x-powered-by");
 const db = require("./db");
-// const bodyParser = require("body-parser");
 const ca = require("chalk-animation");
-
-// app.use(
-//     bodyParser.urlencoded({
-//         extended: false
-//     })
-// );
 
 app.use(express.static("./public"));
 
@@ -67,5 +61,27 @@ app.get("/images", (req, res) => {
         console.log("error in get images:", error);
     });
 });
+
+app.get("/images/:id", (req, res) => {
+    //ca.rainbow("/get-images hit!");
+    db.getImageId(req.params.id
+    ).then((resp) => {
+        res.json(resp);
+        //console.log("resp:", resp);
+    }).catch(error =>{
+        console.log("error in get images:", error);
+    });
+});
+
+// app.post("/comments", (req, res) => {
+//     //ca.rainbow("/get-images hit!");
+//     db.addComments(
+//     ).then((resp) => {
+//         res.json(resp);
+//         //console.log("resp:", resp);
+//     }).catch(error =>{
+//         console.log("error in get images:", error);
+//     });
+// });
 
 app.listen(8080, () => ca.rainbow("listening!"));

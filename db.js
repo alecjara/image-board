@@ -14,5 +14,21 @@ exports.addImages = function(url, username, title, description) {
         RETURNING *`,
         [url, username, title, description]
     );
+};
 
+exports.addComments = function(comment, username) {
+    return db.query(
+        `INSERT INTO comments (comment, username)
+        VALUES ($1, $2)
+        RETURNING *`,
+        [comment, username]
+    );
+};
+
+
+exports.getImageId = function(id) {
+    return db.query(
+        `SELECT * FROM images WHERE id = $1`,
+        [id]
+    );
 };

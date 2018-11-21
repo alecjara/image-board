@@ -7,11 +7,6 @@
     flex-wrap: wrap;
     justify-content: flex-start;
 
-    /* justify-content: space-around;
-    flex-direction: row;
-    display: inline-block; */
-    /* justify-content: space-around;
-    flex-direction: row-reverse; */
 }
 
 img {
@@ -35,3 +30,28 @@ button {
     border-radius: 25%;
     border: 2px solid black;
 }
+
+#modal {
+    position: absolute;
+    border-radius: 14px;
+    padding: 8px;
+    z-index: 9999;
+    width: 50%;
+    height: 1000px;
+    margin-left: 300px;
+    background-color: grey;
+    text-align: center;
+
+}
+
+#modalimage {
+    width: 500px;
+    height: 500px;
+
+
+}
+
+/* #movex {
+    text-align: right;
+
+} */

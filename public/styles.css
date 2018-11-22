@@ -10,15 +10,18 @@
 }
 
 img {
-    height: 300px;
-    width: 300px;
+    height: 400px;
+    width: 400px;
     /* border: 2px solid black; */
-    object-fit: cover;
+    object-fit: scale-down;
 }
 
 .image {
     border: 2px solid black;
+    border-radius: 15%;
     margin: 10px;
+    text-align: center;
+
 }
 
 input {
@@ -37,7 +40,7 @@ button {
     padding: 8px;
     z-index: 9999;
     width: 50%;
-    height: 1000px;
+    /* height: 1000px; */
     margin-left: 300px;
     background-color: grey;
     text-align: center;
@@ -47,11 +50,13 @@ button {
 #modalimage {
     width: 500px;
     height: 500px;
-
-
 }
 
-/* #movex {
-    text-align: right;
+#morebutton {
+    width: 60px;
+    height: 40px;
+}
 
-} */
+.comments {
+    background-color: white;
+}

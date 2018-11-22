@@ -12,9 +12,9 @@ CREATE TABLE images(
 
 CREATE TABLE comments(
     id SERIAL PRIMARY KEY,
-    comments TEXT,
+    comment TEXT,
     username VARCHAR(255),
-    imageId INTEGER UNIQUE NOT NULL REFERENCES images(id) 
+    imageId INTEGER NOT NULL
 );
 
 INSERT INTO images (url, username, title, description) VALUES (

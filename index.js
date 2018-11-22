@@ -23,7 +23,7 @@ var diskStorage = multer.diskStorage({
 var uploader = multer({
     storage: diskStorage,
     limits: {
-        fileSize: 2097152
+        fileSize: 3097152
     }
 });
 //end of boilerplate (do not touch)
@@ -73,15 +73,27 @@ app.get("/images/:id", (req, res) => {
     });
 });
 
-// app.post("/comments", (req, res) => {
-//     //ca.rainbow("/get-images hit!");
-//     db.addComments(
-//     ).then((resp) => {
-//         res.json(resp);
-//         //console.log("resp:", resp);
-//     }).catch(error =>{
-//         console.log("error in get images:", error);
-//     });
-// });
+app.post("/images/:id", (req, res) => {
+    //console.log("req.body:", req.body);
+    db.addComments(req.body.comment, req.body.comusername, req.params.id
+    ).then((resp) => {
+        //console.log(req.boby.comment);
+        res.json(resp);
+        //console.log("resp:", resp);
+    }).catch(error =>{
+        console.log("error in post images:", error);
+    });
+});
+
+//part4
+app.get('/get-more-images/:id', (req, res) => {
+    var lastId = req.params.id;
+
+    db.getMoreImages(lastId).then(images => {
+        //console.log("images in get more images:", images);
+        //res.json sends them to vue to do his stuff
+        res.json(images);
+    });
+});
 
 app.listen(8080, () => ca.rainbow("listening!"));

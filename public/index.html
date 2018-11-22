@@ -10,14 +10,6 @@
     <h1>Ale's ImageBoard</h1>
 
     <div id="main">
-
-        <div class="image" v-for = "image in images" @click="toggleComponent">
-        <img :src ="image.url" :id="image.id">
-        <p>{{image.title}}</p>
-
-        </div>
-
-        <!-- part2 -->
         <form>
             <input v-model="form.title" placeholder="title" type="text" name="title">
             <input v-model="form.description" placeholder="description" type="text" name="description">
@@ -25,6 +17,18 @@
             <input type="file" accept="image/*" @change="handleFileChange">
             <button @click="uploadFile">upload</button>
         </form>
+
+        <div class="image" v-for = "image in images" @click="toggleComponent">
+        <!-- <a> for part4 #3 image id 3 in this case, hash infront to keep us on the page -->
+        <a :href=" '#' + image.id ">
+            <img :src ="image.url" :id="image.id">
+            <p>{{image.title}}</p>
+        </a>
+
+        </div>
+
+
+
             <!-- part3 -->
         <!-- to add prop here name orange is from component props and name green from new Vue instance-->
         <!-- :name gives me the full name I wrote in the Vue -->
@@ -33,9 +37,11 @@
         v-if="imageId"
         @close-component="closingTheComponent"
         @click="toggleComponent"
+
         >
         </some-component>
 
+        <button id="morebutton" @click = "getMoreImages">More</button>
     </div>
 
 
@@ -47,14 +53,24 @@
             <h2>Description: {{ description }}</h2>
             <h2>User name: {{ username }}</h2>
             <p>Created at: {{ created_at}}</p>
-            <h1 @click="handleClick"></h1>
+            <!-- <h1 @click="handleClick"></h1> -->
+            <div class="comments">
+                <h1>Comments:</h1>
+                <form>
+                    <input v-model="comment" placeholder="comment" type="text" name="comment" required>
+                    <input v-model="comusername" placeholder="username" type="text" name="username" required>
+                    <button class="combutton" @click="addcomment">Submit</button>
+                </form>
+                <div v-for="comment in comments">
+                    <div class="comment">
+                        <div class="text">
+                            <h2>{{comment.comment}}</h2>
+                        </div>
+                        <a class="writer">{{comment.comusername}}</a>
+                    </div>
+                </div>
 
-            <form method="POST">
-                <input v-model="form.comment" placeholder="comment" type="text" name="comment">
-                <input v-model="form.username" placeholder="username" type="text" name="username">
-                <button @click="submit">submit</button>
-            </form>
-
+            </div>
         </div>
     </script>
 

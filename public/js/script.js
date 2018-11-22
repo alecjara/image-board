@@ -16,17 +16,22 @@
                 description: "",
                 username: "",
                 url: "",
-                form: {
-                    comment: "",
-                    username: ""
-                }
+                comment: "",
+                comusername: "",
+                comments: []
+
             };
         },
 
+        watch: {
+            imageId: function() {
+                console.log("watcher running:", this.imageId);
+            }
+        },
+
+
         mounted: function() {
-            //here should console.log the id of the image that was clicked:
-            //console.log("this is the imageId:", this.imageId);
-            //console.log("this of vue comp:", this);
+
             var self = this;
             axios.get("/images/" + this.imageId).then(function(resp) {
                 console.log("resp:", resp);
@@ -35,9 +40,9 @@
                 self.description = resp.data.rows[0].description;
                 self.username = resp.data.rows[0].username;
                 self.url = resp.data.rows[0].url;
-                //var idFromServer = resp.data.rows[0];
-                // self.imageId = idFromServer;
-                //console.log("this imageId:", this.imageId);
+                self.image = resp.data.rows[0];
+                self.comments = resp.data.rows;
+
             });
         },
 
@@ -49,7 +54,26 @@
             closeComponent: function() {
                 //sending a message to new Vue:
                 this.$emit("close-component");
+                console.log("clicked on x");
+            },
+
+            addcomment: function(e) {
+                e.preventDefault();
+                var self = this;
+                var formData = {
+                    comment: this.comment,
+                    comusername: this.comusername
+                };
+                console.log("formData:", formData);
+                axios.post("/images/" + this.imageId, formData
+                ).then(function(resp) {
+                    self.comments.unshift(resp.data.rows[0]);
+                //console.log("this is data rows:" resp);
+                }).catch(error =>{
+                    console.log("error in post comment:", error);
+                });
             }
+
         }
 
     });
@@ -59,13 +83,9 @@
         data: {
             //firstName: "Ale Jaramillo",
             images: [],
+            //location.hash.slice(1) is just the number that is in the url
+            imageId: location.hash.slice(1) || 0,
 
-            //the value the image id should have is the id of the image that was clicked
-            imageId: 0,
-            //only show the model when the person clicks the image.
-            //FOR PART3 change HIS NEXT SHOW COMPONENT
-            //we need the component to have access to that id with props
-            //showComponent: true,
             form: {
                 title: "",
                 description: "",
@@ -76,6 +96,15 @@
 
         mounted: function() {
             var self = this;
+
+            //listen for when the # changes and we have to react to it:
+            window.addEventListener("hashchange", function() {
+                console.log("hash has changed!", location.hash.slice(1));
+                self.imageId = location.hash.slice(1);
+                //check to make sure value that the user puts in the url actually corresponds to an image that exists
+                //so when they add a crazy value it doesn't break our code
+            });
+
             axios.get('/images')
                 .then(function(resp) {
                     //console.log("resp:", resp.data.rows);
@@ -92,7 +121,7 @@
                 //ERASE THIS.SHOWCOMPONENT AND USE this.imageId = IDOFIMAGETHATWASCLICKED
                 // this.showComponent = true;
                 this.imageId = e.target.id;
-                console.log("this is imageId:", this.imageId);
+                //console.log("this is imageId:", this.imageId);
             },
 
             closingTheComponent: function() {
@@ -106,6 +135,11 @@
                 this.form.file = e.target.files[0];
                 //console.log("this.form:", this.form);
             },
+
+            addcomment: function() {
+                console.log("comment!!");
+            },
+
             //function that runs when user clicks submit button
             uploadFile: function(e) {
                 var self = this;
@@ -126,10 +160,23 @@
                     var imagesFromServer = resp.data.rows[0];
                     self.images.unshift(imagesFromServer);
                 });
+            },
 
+            //part4 not sure if here:
+            getMoreImages: function() {
+                var self = this;
+                var lastId = this.images[this.images.length - 1].id;
 
-                
+                axios.get('/get-more-images/' + lastId).then(function(resp) {
+                    console.log("resp in get-more-images:", resp);
+                    //mergin images array and the array that we got
+                    self.images.push.apply(self.images, resp.data);
+                    //if the last id in my array is 1 then the more button disappears!!!
+                    //not really necessary: we can to figure out what is the last id in our database
+                });
             }
+
+
         } //end of methods:
     }); //end of new Vue instance
 

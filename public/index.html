@@ -10,11 +10,11 @@
     <h1>Ale's ImageBoard</h1>
 
     <div id="main">
-        <form>
+        <form class="form1">
             <input v-model="form.title" placeholder="title" type="text" name="title">
             <input v-model="form.description" placeholder="description" type="text" name="description">
             <input v-model="form.username" placeholder="username" type="text" name="username">
-            <input type="file" accept="image/*" @change="handleFileChange">
+            <input type="file" accept="image/*" @change="handleFileChange" id="addfile">
             <button @click="uploadFile">upload</button>
         </form>
 
@@ -41,17 +41,17 @@
         >
         </some-component>
 
-        <button id="morebutton" @click = "getMoreImages">More</button>
+        <button id="more-button" @click = "getMoreImages" v-if="moreButton">More</button>
     </div>
 
 
     <script id="my-template" type="text/x-template">
         <div id="modal">
-            <h1 @click="closeComponent">x</h1>
+            <h1 @click="closeComponent" align="right">x</h1>
             <img :src ="url" id="modalimage">
-            <h1>Title: {{ title }}</h1>
-            <h2>Description: {{ description }}</h2>
-            <h2>User name: {{ username }}</h2>
+            <h2>Title: {{ title }}</h2>
+            <h3>Description: {{ description }}</h3>
+            <h3>User name: {{ username }}</h3>
             <p>Created at: {{ created_at}}</p>
             <!-- <h1 @click="handleClick"></h1> -->
             <div class="comments">

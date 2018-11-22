@@ -91,7 +91,8 @@
                 description: "",
                 username: "",
                 file: null
-            }
+            },
+            moreButton: true,
         },
 
         mounted: function() {
@@ -111,10 +112,13 @@
                     var imagesArrayFromServer = resp.data.rows;
                     self.images = imagesArrayFromServer;
                     //console.log('self:', self.images);
+                    if (resp.data.rows.length) {
+                        self.moreButton = true;
+                    }
                 });
 
         }, //mounted function ends
-        //methods are functions that live inside of an object that runs in response to an event
+
         methods: {
 
             toggleComponent: function(e) {
@@ -172,6 +176,11 @@
                     //mergin images array and the array that we got
                     self.images.push.apply(self.images, resp.data);
                     //if the last id in my array is 1 then the more button disappears!!!
+                    lastId = self.images[self.images.length - 1].id;
+                    if (lastId == 4) {
+                        // console.log("lastId:", lastId);
+                        self.moreButton = false;
+                    }
                     //not really necessary: we can to figure out what is the last id in our database
                 });
             }

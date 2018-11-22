@@ -3,9 +3,14 @@
 }
 
 #main {
+
     display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
+    /* flex-wrap: wrap; */
+    justify-content: space-between;
+
+}
+
+.form1 {
 
 }
 
@@ -26,37 +31,60 @@ img {
 
 input {
     font-size: 20px;
+    border-radius: 15%;
+    margin-top: 10px;
+
+}
+
+#addfile {
+    font-size: 20px;
+    border-radius: 15%;
+    margin-top: 15px;
+    /* border: 2px solid black; */
+    width: 225px;
 }
 
 button {
     font-size: 20px;
     border-radius: 25%;
     border: 2px solid black;
+    margin-top:  10px;
+
 }
 
 #modal {
     position: absolute;
-    border-radius: 14px;
+    border-radius: 5%;
     padding: 8px;
     z-index: 9999;
-    width: 50%;
+    width: 75%;
     /* height: 1000px; */
     margin-left: 300px;
-    background-color: grey;
+    background-color: white;
     text-align: center;
+    color: black;
+    border: 3px black solid;
 
 }
 
 #modalimage {
     width: 500px;
-    height: 500px;
+    height: 400px;
 }
 
-#morebutton {
+#more-button {
     width: 60px;
     height: 40px;
 }
 
+.description {
+
+
+}
+
 .comments {
-    background-color: white;
+    /* background-color: lightgray; */
+    border: 3px dashed white;
+    border-radius: 10%;
+    display: inline-block;
 }

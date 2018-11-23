@@ -4,14 +4,16 @@
 
 #main {
 
-    display: flex;
-    /* flex-wrap: wrap; */
-    justify-content: space-between;
+
+    /* display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; */
 
 }
 
 .form1 {
-
+    display: inline;
+    width: 100%;
 }
 
 img {
@@ -22,6 +24,7 @@ img {
 }
 
 .image {
+
     border: 2px solid black;
     border-radius: 15%;
     margin: 10px;
@@ -29,11 +32,22 @@ img {
 
 }
 
+#image-cont {
+    /* width: 100%; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+}
+
 input {
+    /* padding-left: 30px; */
     font-size: 20px;
     border-radius: 15%;
+    margin-left: 30px;
     margin-top: 10px;
-
+    margin-bottom: 30px;
+    /* display: inline; */
 }
 
 #addfile {
@@ -49,17 +63,21 @@ button {
     border-radius: 25%;
     border: 2px solid black;
     margin-top:  10px;
+    cursor: pointer;
 
 }
 
 #modal {
     position: absolute;
+    overflow: scroll;
     border-radius: 5%;
     padding: 8px;
     z-index: 9999;
     width: 75%;
-    /* height: 1000px; */
-    margin-left: 300px;
+    top: 25px;
+    left: 200px;
+    /* min-height: 100px;
+    right: 0; */
     background-color: white;
     text-align: center;
     color: black;
@@ -75,6 +93,9 @@ button {
 #more-button {
     width: 60px;
     height: 40px;
+    margin-left: 30px;
+    margin-top: 30px;
+
 }
 
 .description {
@@ -82,9 +103,26 @@ button {
 
 }
 
+
 .comments {
     /* background-color: lightgray; */
     border: 3px dashed white;
     border-radius: 10%;
+    display: inline-block;
+}
+
+
+a:link, a:visited, a:hover, a:active {
+   color: black;
+   background-color: transparent;
+   text-decoration: underline;
+}
+
+.comment {
+    border: 2px dashed black;
+
+}
+
+.text {
     display: inline-block;
 }

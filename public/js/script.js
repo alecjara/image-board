@@ -96,6 +96,14 @@
         },
 
         mounted: function() {
+
+            //bonus option 3
+            // setInterval(function() {
+            //     console.log("there is a new image");
+            //     do something in here that checks for those new images
+            // }, 3000);
+
+
             var self = this;
 
             //listen for when the # changes and we have to react to it:
@@ -166,26 +174,19 @@
                 });
             },
 
-            //part4 not sure if here:
             getMoreImages: function() {
                 var self = this;
                 var lastId = this.images[this.images.length - 1].id;
 
                 axios.get('/get-more-images/' + lastId).then(function(resp) {
                     console.log("resp in get-more-images:", resp);
-                    //mergin images array and the array that we got
                     self.images.push.apply(self.images, resp.data);
-                    //if the last id in my array is 1 then the more button disappears!!!
                     lastId = self.images[self.images.length - 1].id;
                     if (lastId == 4) {
-                        // console.log("lastId:", lastId);
                         self.moreButton = false;
                     }
-                    //not really necessary: we can to figure out what is the last id in our database
                 });
             }
-
-
         } //end of methods:
     }); //end of new Vue instance
 

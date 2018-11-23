@@ -7,9 +7,9 @@
 <body>
 
 
-    <h1>Ale's ImageBoard</h1>
+    <h1 align="center">Ale's ImageBoard</h1>
 
-    <div id="main">
+    <div id="main" >
         <form class="form1">
             <input v-model="form.title" placeholder="title" type="text" name="title">
             <input v-model="form.description" placeholder="description" type="text" name="description">
@@ -17,14 +17,14 @@
             <input type="file" accept="image/*" @change="handleFileChange" id="addfile">
             <button @click="uploadFile">upload</button>
         </form>
+        <div id="image-cont">
+            <div class="image" v-for = "image in images" @click="toggleComponent">
 
-        <div class="image" v-for = "image in images" @click="toggleComponent">
-        <!-- <a> for part4 #3 image id 3 in this case, hash infront to keep us on the page -->
-        <a :href=" '#' + image.id ">
+            <a :href=" '#' + image.id ">
             <img :src ="image.url" :id="image.id">
-            <p>{{image.title}}</p>
-        </a>
-
+            <h2>{{image.title}}</h2>
+            </a>
+        </div>
         </div>
 
 
@@ -61,6 +61,7 @@
                     <input v-model="comusername" placeholder="username" type="text" name="username" required>
                     <button class="combutton" @click="addcomment">Submit</button>
                 </form>
+                <br>
                 <div v-for="comment in comments">
                     <div class="comment">
                         <div class="text">

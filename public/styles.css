@@ -41,26 +41,29 @@ img {
 }
 
 input {
-    /* padding-left: 30px; */
     font-size: 20px;
-    border-radius: 15%;
-    margin-left: 30px;
+    border-radius: 10px;
+    margin-left: 80px;
     margin-top: 10px;
     margin-bottom: 30px;
-    /* display: inline; */
+    border: 2px solid black;
 }
 
 #addfile {
     font-size: 20px;
-    border-radius: 15%;
+    border-radius: 10px;
     margin-top: 15px;
-    /* border: 2px solid black; */
     width: 225px;
+    /* border: 2px solid black; */
+
+
 }
+
+
 
 button {
     font-size: 20px;
-    border-radius: 25%;
+    border-radius: 25px;
     border: 2px solid black;
     margin-top:  10px;
     cursor: pointer;
@@ -91,7 +94,7 @@ button {
 }
 
 #more-button {
-    width: 60px;
+    width: 70px;
     height: 40px;
     margin-left: 30px;
     margin-top: 30px;
@@ -102,6 +105,17 @@ button {
 
 
 }
+
+#leftarrow {
+    float: left;
+}
+
+#rightarrow {
+    float: right;
+
+}
+
+
 
 
 .comments {

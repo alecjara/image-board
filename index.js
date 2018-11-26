@@ -63,7 +63,7 @@ app.get("/images", (req, res) => {
 });
 
 app.get("/images/:id", (req, res) => {
-    //ca.rainbow("/get-images hit!");
+    console.log("/get-images id!");
     db.getImageId(req.params.id
     ).then((resp) => {
         res.json(resp);

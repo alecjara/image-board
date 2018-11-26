@@ -49,6 +49,12 @@
         <div id="modal">
             <h1 @click="closeComponent" align="right">x</h1>
             <img :src ="url" id="modalimage">
+            <!-- <div class="arrows">
+                <a :href="prev_id" id="leftarrow" v-if="prev_id"><h1>&#8592; previous</h1></a>
+                <a :href="next_id" id="rightarrow" v-if="next_id"><h1>next &#8594;</h1></a>
+            </div> -->
+            
+
             <h2>Title: {{ title }}</h2>
             <h3>Description: {{ description }}</h3>
             <h3>User name: {{ username }}</h3>

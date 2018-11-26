@@ -1,16 +1,12 @@
 (function() {
 
     Vue.component("some-component", {
-        //we cannot do here is the el: "#main"
-        //we have to write the html or template for this part
         template: '#my-template',
-        //prop is to get information from the new Vue instance to here (from parent to child)
-        //it is always [] even if it is one.
+        
         props: ['imageId'],
-        //data here is not an object, is a function that returns an object but it will work the same way
         data:  function() {
             return {
-                //heading: "catnip's first vue component <3"
+
                 created_at: "",
                 title: "",
                 description: "",
@@ -26,6 +22,18 @@
         watch: {
             imageId: function() {
                 console.log("watcher running:", this.imageId);
+                //added 24.11
+                var self = this;
+                axios.get("/images/" + this.imageId).then(function(resp) {
+                    if (resp.data.length > 0) {
+                        self.image = resp.data.rows[0];
+                    } else {
+                        location.hash = "";
+                        self.$emit("close-component");
+                    }
+                }).catch(error =>{
+                    console.log("error in watch:", error);
+                });
             }
         },
 
@@ -34,7 +42,7 @@
 
             var self = this;
             axios.get("/images/" + this.imageId).then(function(resp) {
-                console.log("resp:", resp);
+                //console.log("resp:", resp);
                 self.created_at = resp.data.rows[0].created_at;
                 self.title = resp.data.rows[0].title;
                 self.description = resp.data.rows[0].description;
@@ -42,6 +50,8 @@
                 self.url = resp.data.rows[0].url;
                 self.image = resp.data.rows[0];
                 self.comments = resp.data.rows;
+                //ADDED 24.11:
+                self.id = resp.data.rows[0].id;
 
             });
         },
@@ -62,7 +72,9 @@
                 var self = this;
                 var formData = {
                     comment: this.comment,
-                    comusername: this.comusername
+                    comusername: this.comusername,
+                    //added 24.11
+                    imageId: this.id
                 };
                 console.log("formData:", formData);
                 axios.post("/images/" + this.imageId, formData
@@ -103,12 +115,10 @@
             //     do something in here that checks for those new images
             // }, 3000);
 
-
             var self = this;
 
-            //listen for when the # changes and we have to react to it:
             window.addEventListener("hashchange", function() {
-                console.log("hash has changed!", location.hash.slice(1));
+                //console.log("hash has changed!", location.hash.slice(1));
                 self.imageId = location.hash.slice(1);
                 //check to make sure value that the user puts in the url actually corresponds to an image that exists
                 //so when they add a crazy value it doesn't break our code
@@ -119,7 +129,7 @@
                     //console.log("resp:", resp.data.rows);
                     var imagesArrayFromServer = resp.data.rows;
                     self.images = imagesArrayFromServer;
-                    //console.log('self:', self.images);
+                    console.log('self.images:', self.images);
                     if (resp.data.rows.length) {
                         self.moreButton = true;
                     }
@@ -179,7 +189,7 @@
                 var lastId = this.images[this.images.length - 1].id;
 
                 axios.get('/get-more-images/' + lastId).then(function(resp) {
-                    console.log("resp in get-more-images:", resp);
+                    console.log("lastId:", lastId);
                     self.images.push.apply(self.images, resp.data);
                     lastId = self.images[self.images.length - 1].id;
                     if (lastId == 4) {

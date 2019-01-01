@@ -1,4 +1,4 @@
-# image-board Cute Animals
+# Image-board Cute Animals
 
 
 ## Summary

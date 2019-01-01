@@ -25,6 +25,8 @@ Comments made on the image are displayed in a reverse chronological order.
 
 ![ib1](/ib1.png)
 
+
 ![ib2](/ib2.png)
+
 
 ![ib3](/ib3.png)
